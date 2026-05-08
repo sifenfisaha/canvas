@@ -1,16 +1,5 @@
-import { useState } from "react";
-
-type ToolId =
-  | "select"
-  | "rectangle"
-  | "circle"
-  | "ellipse"
-  | "triangle"
-  | "line"
-  | "arrow"
-  | "pen"
-  | "text"
-  | "eraser";
+import { useToolStore } from "../store/useToolStore";
+import type { ToolId } from "../types/tools";
 
 interface Tool {
   id: ToolId;
@@ -198,9 +187,12 @@ const colors = [
 ];
 
 const Sidebar = () => {
-  const [activeTool, setActiveTool] = useState<ToolId>("select");
-  const [activeColor, setActiveColor] = useState<string>("#3b82f6");
-  const [strokeWidth, setStrokeWidth] = useState<number>(3);
+  const activeTool = useToolStore((s) => s.activeTool);
+  const setActiveTool = useToolStore((s) => s.setActiveTool);
+  const activeColor = useToolStore((s) => s.activeColor);
+  const setActiveColor = useToolStore((s) => s.setActiveColor);
+  const strokeWidth = useToolStore((s) => s.strokeWidth);
+  const setStrokeWidth = useToolStore((s) => s.setStrokeWidth);
 
   return (
     <aside
