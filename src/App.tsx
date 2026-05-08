@@ -1,122 +1,116 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { Layer, Stage, Rect } from "react-konva";
+import { useRef, useState } from "react";
+import type Konva from "konva";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+interface RectType {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  id: string;
 }
 
-export default App
+const App = () => {
+  const [rectangles, setRectangles] = useState<RectType[]>([]);
+  const [newRec, setNewRec] = useState<RectType | null>();
+  const [isDrawing, setIsDrawing] = useState(false);
+  const statfeRef = useRef<Konva.Stage | null>(null);
+
+  const handleMouseDown = () => {
+    const stage = statfeRef.current;
+
+    if (!stage) {
+      return;
+    }
+    const { x, y } = stage.getPointerPosition() || { x: 0, y: 0 };
+    setNewRec({
+      x,
+      y,
+      width: 0,
+      height: 0,
+      id: Math.random().toString(),
+    });
+    setIsDrawing(true);
+  };
+
+  const handleMouseMove = () => {
+    if (!isDrawing || !newRec) {
+      return;
+    }
+    const stage = statfeRef.current;
+
+    if (!stage) {
+      return;
+    }
+
+    const { x, y } = stage.getPointerPosition() || { x: 0, y: 0 };
+    const width = x - newRec.x;
+    const height = y - newRec.y;
+    setNewRec({ ...newRec, width, height });
+  };
+
+  const handleMouseUp = () => {
+    if (newRec) {
+      setRectangles([...rectangles, newRec]);
+      console.log(rectangles);
+      setNewRec(null);
+    }
+    setIsDrawing(false);
+  };
+
+  const handleExport = () => {
+    const stage = statfeRef.current;
+
+    if (!stage) {
+      return;
+    }
+
+    const dataURL = stage.toDataURL();
+    const link = document.createElement("a");
+    link.download = "canvas.png";
+    link.href = dataURL;
+    link.click();
+  };
+
+  return (
+    <div>
+      <button onClick={handleExport}>Export canvas</button>
+      <Stage
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        ref={statfeRef}
+        width={window.innerWidth}
+        height={window.innerHeight}
+        style={{ background: "lightgray" }}
+      >
+        <Layer>
+          <Rect x={20} y={20} width={100} height={100} fill={"red"} draggable />
+
+          {rectangles.map((rec) => (
+            <Rect
+              key={rec.id}
+              x={rec.x}
+              y={rec.y}
+              width={rec.width}
+              height={rec.height}
+              fill={"rgba(0, 0, 255, 0.5)"}
+            />
+          ))}
+
+          {newRec && (
+            <Rect
+              x={newRec.x}
+              y={newRec.y}
+              width={newRec.width}
+              height={newRec.height}
+              fill={"rgba(0, 0, 255, 0.5)"}
+            />
+          )}
+        </Layer>
+      </Stage>
+    </div>
+  );
+};
+
+export default App;
