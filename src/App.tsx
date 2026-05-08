@@ -1,6 +1,7 @@
 import { Layer, Stage, Rect } from "react-konva";
 import { useRef, useState } from "react";
 import type Konva from "konva";
+import Sidebar from "./components/Sidebar";
 
 interface RectType {
   x: number;
@@ -58,23 +59,9 @@ const App = () => {
     setIsDrawing(false);
   };
 
-  const handleExport = () => {
-    const stage = statfeRef.current;
-
-    if (!stage) {
-      return;
-    }
-
-    const dataURL = stage.toDataURL();
-    const link = document.createElement("a");
-    link.download = "canvas.png";
-    link.href = dataURL;
-    link.click();
-  };
-
   return (
-    <div>
-      <button onClick={handleExport}>Export canvas</button>
+    <div className="relative h-screen w-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50">
+      <Sidebar />
       <Stage
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -82,11 +69,8 @@ const App = () => {
         ref={statfeRef}
         width={window.innerWidth}
         height={window.innerHeight}
-        style={{ background: "lightgray" }}
       >
         <Layer>
-          <Rect x={20} y={20} width={100} height={100} fill={"red"} draggable />
-
           {rectangles.map((rec) => (
             <Rect
               key={rec.id}
