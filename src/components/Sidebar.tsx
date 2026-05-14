@@ -41,6 +41,22 @@ const tools: Tool[] = [
     ),
   },
   {
+    id: "square",
+    label: "Square",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="5" y="5" width="14" height="14" rx="1.5" />
+      </svg>
+    ),
+  },
+  {
     id: "circle",
     label: "Circle",
     icon: (

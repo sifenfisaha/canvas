@@ -1,6 +1,7 @@
 export type ToolId =
   | "select"
   | "rectangle"
+  | "square"
   | "circle"
   | "ellipse"
   | "triangle"
