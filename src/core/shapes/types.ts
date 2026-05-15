@@ -72,6 +72,17 @@ export interface ArrowShape {
   strokeWidth: number;
 }
 
+export interface DiamondShape {
+  id: string;
+  type: "diamond";
+  x: number;
+  y: number;
+  radius: number;
+  fill: string;
+  stroke: string;
+  strokeWidth: number;
+}
+
 export type Shape =
   | RectangleShape
   | SquareShape
@@ -79,7 +90,8 @@ export type Shape =
   | EllipseShape
   | TriangleShape
   | LineShape
-  | ArrowShape;
+  | ArrowShape
+  | DiamondShape;
 
 export type ShapeType = Shape["type"];
 

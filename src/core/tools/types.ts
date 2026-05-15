@@ -9,4 +9,5 @@ export type ToolId =
   | "arrow"
   | "pen"
   | "text"
-  | "eraser";
+  | "eraser"
+  | "diamond";

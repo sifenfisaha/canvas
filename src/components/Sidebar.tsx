@@ -57,6 +57,22 @@ const tools: Tool[] = [
     ),
   },
   {
+    id: "diamond",
+    label: "Diamond",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 3l9 9-9 9-9-9z" />
+      </svg>
+    ),
+  },
+  {
     id: "circle",
     label: "Circle",
     icon: (

@@ -21,6 +21,7 @@ export const useDrawing = (stageRef: RefObject<Konva.Stage | null>) => {
       color: activeColor,
       strokeWidth,
     });
+    console.log("Creating draft:", next);
     if (next) setDraft(next);
   };
 

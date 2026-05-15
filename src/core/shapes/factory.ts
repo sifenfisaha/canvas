@@ -1,10 +1,4 @@
-import type {
-  DrawStyle,
-  Point,
-  Shape,
-  ShapeOfType,
-  ShapeType,
-} from "./types";
+import type { DrawStyle, Point, Shape, ShapeOfType, ShapeType } from "./types";
 
 type ShapeFactories = {
   [T in ShapeType]: (pos: Point, style: DrawStyle) => ShapeOfType<T>;
@@ -77,6 +71,16 @@ export const shapeFactories: ShapeFactories = {
     type: "arrow",
     points: [pos.x, pos.y, pos.x, pos.y],
     fill: style.color,
+    stroke: style.color,
+    strokeWidth: style.strokeWidth,
+  }),
+  diamond: (pos, style) => ({
+    id: crypto.randomUUID(),
+    type: "diamond",
+    x: pos.x,
+    y: pos.y,
+    radius: 0,
+    fill: fillFrom(style.color),
     stroke: style.color,
     strokeWidth: style.strokeWidth,
   }),

@@ -6,6 +6,7 @@ import EllipseShape from "./EllipseShape";
 import TriangleShape from "./TriangleShape";
 import LineShape from "./LineShape";
 import ArrowShape from "./ArrowShape";
+import DiamondShape from "./DiamondShape";
 
 interface Props {
   shape: Shape;
@@ -27,6 +28,8 @@ const ShapeRenderer = ({ shape }: Props) => {
       return <LineShape shape={shape} />;
     case "arrow":
       return <ArrowShape shape={shape} />;
+    case "diamond":
+      return <DiamondShape shape={shape} />;
     default:
       return null;
   }

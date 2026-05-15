@@ -39,12 +39,14 @@ const shapeUpdaters: ShapeUpdaters = {
     ...shape,
     points: [shape.points[0], shape.points[1], pos.x, pos.y],
   }),
+  diamond: (shape, pos) => {
+    const dx = pos.x - shape.x;
+    const dy = pos.y - shape.y;
+    return { ...shape, radius: Math.hypot(dx, dy) };
+  },
 };
 
 export const updateShape = (shape: Shape, pos: Point): Shape => {
-  const updater = shapeUpdaters[shape.type] as (
-    s: Shape,
-    p: Point,
-  ) => Shape;
+  const updater = shapeUpdaters[shape.type] as (s: Shape, p: Point) => Shape;
   return updater(shape, pos);
 };
