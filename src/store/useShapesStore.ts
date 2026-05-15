@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Shape } from "../types/shapes";
+import type { Shape } from "../core/shapes/types";
 
 interface ShapesState {
   shapes: Shape[];

@@ -1,5 +1,5 @@
 import { Ellipse } from "react-konva";
-import type { EllipseShape as EllipseShapeData } from "../../types/shapes";
+import type { EllipseShape as EllipseShapeData } from "../../core/shapes/types";
 
 interface Props {
   shape: EllipseShapeData;

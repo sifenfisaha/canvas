@@ -1,4 +1,4 @@
-import type { Shape } from "../../types/shapes";
+import type { Shape } from "../../core/shapes/types";
 import RectangleShape from "./RectangleShape";
 import CircleShape from "./CircleShape";
 import SquareShape from "./SquareShape";

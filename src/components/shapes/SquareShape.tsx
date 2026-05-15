@@ -1,5 +1,5 @@
 import { Rect } from "react-konva";
-import type { SquareShape as SquareShapeData } from "../../types/shapes";
+import type { SquareShape as SquareShapeData } from "../../core/shapes/types";
 
 interface Props {
   shape: SquareShapeData;

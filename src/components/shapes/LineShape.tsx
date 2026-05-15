@@ -1,5 +1,5 @@
 import { Line } from "react-konva";
-import type { LineShape as LineShapeData } from "../../types/shapes";
+import type { LineShape as LineShapeData } from "../../core/shapes/types";
 
 interface Props {
   shape: LineShapeData;

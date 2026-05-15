@@ -1,5 +1,5 @@
 import { Arrow } from "react-konva";
-import type { ArrowShape as ArrowShapeData } from "../../types/shapes";
+import type { ArrowShape as ArrowShapeData } from "../../core/shapes/types";
 
 interface Props {
   shape: ArrowShapeData;

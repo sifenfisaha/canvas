@@ -1,5 +1,5 @@
 import { RegularPolygon } from "react-konva";
-import type { TriangleShape as TriangleShapeData } from "../../types/shapes";
+import type { TriangleShape as TriangleShapeData } from "../../core/shapes/types";
 
 interface Props {
   shape: TriangleShapeData;

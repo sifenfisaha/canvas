@@ -1,5 +1,5 @@
 import { Rect } from "react-konva";
-import type { RectangleShape as RectangleShapeData } from "../../types/shapes";
+import type { RectangleShape as RectangleShapeData } from "../../core/shapes/types";
 
 interface Props {
   shape: RectangleShapeData;

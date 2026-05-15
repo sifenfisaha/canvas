@@ -80,3 +80,17 @@ export type Shape =
   | TriangleShape
   | LineShape
   | ArrowShape;
+
+export type ShapeType = Shape["type"];
+
+export type ShapeOfType<T extends ShapeType> = Extract<Shape, { type: T }>;
+
+export interface Point {
+  x: number;
+  y: number;
+}
+
+export interface DrawStyle {
+  color: string;
+  strokeWidth: number;
+}

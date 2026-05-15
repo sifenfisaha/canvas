@@ -1,5 +1,5 @@
 import { useToolStore } from "../store/useToolStore";
-import type { ToolId } from "../types/tools";
+import type { ToolId } from "../core/tools/types";
 
 interface Tool {
   id: ToolId;

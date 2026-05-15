@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { ToolId } from "../types/tools";
+import type { ToolId } from "../core/tools/types";
 
 interface ToolState {
   activeTool: ToolId;

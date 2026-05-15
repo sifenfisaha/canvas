@@ -1,5 +1,5 @@
 import { Circle } from "react-konva";
-import type { CircleShape as CircleShapeData } from "../../types/shapes";
+import type { CircleShape as CircleShapeData } from "../../core/shapes/types";
 
 interface Props {
   shape: CircleShapeData;
